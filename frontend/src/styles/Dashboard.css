@@ -1,0 +1,34 @@
+.dashboard {
+  padding-left: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.dashboard-heading {
+  font-size: 2rem;
+  color: #333;
+  /* margin-bottom: 20px; */
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: 20px;
+  height: calc(100vh - 120px);
+}
+
+.left-panel {
+  flex: 2;
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.right-panel {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 90px;
+}

@@ -1,0 +1,42 @@
+.gauge-container {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 180px;
+  height: 210px;
+}
+
+.gauge-container h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.gauge-chart {
+  position: relative;
+  height: 120px;
+}
+
+.gauge-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -20%);
+  text-align: center;
+}
+
+.gauge-value span {
+  display: block;
+}
+
+.gauge-value span:first-child {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.unit {
+  font-size: 0.9rem;
+  color: #666;
+}

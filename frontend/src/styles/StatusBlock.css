@@ -1,0 +1,22 @@
+.status-block {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.status-block h2 {
+  margin: 10px 0;
+  color: #333;
+}
+
+.status-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.currency-image{
+  height: 20px;
+}
