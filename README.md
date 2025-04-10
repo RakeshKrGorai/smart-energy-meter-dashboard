@@ -7,7 +7,7 @@ git clone https://github.com/RakeshKrGorai/smart-energy-meter
   ```
 ### 2. Change directory to backend:
   ```
-cd frontend
+cd backend
   ```
 ### 3. Install dependencies:
   ```
