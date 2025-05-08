@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
 import StatusBlock from './StatusBlock';
 import GaugeChart from './GaugeChart';
+import ActiveDevices from './ActiveDevices';
 import '../styles/Dashboard.css';
 
 function Dashboard() {
@@ -16,8 +17,8 @@ function Dashboard() {
     }]
   });
 
-  const [powerReading, setpowerReading] = useState('healthy');
-  const [Reading, setReading] = useState(75);
+  const [powerReading, setpowerReading] = useState("");
+  const [Reading, setReading] = useState("");
 
   useEffect(() => {
     // Simulated data fetching
@@ -42,10 +43,16 @@ function Dashboard() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleDownload = (type) => {
+    const url = `http://localhost:4000/download/energy-data?type=${type}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div className="dashboard">
       <h1 className="dashboard-heading">System Dashboard</h1>
-      <h3 className='subheading'>Device 1</h3>
+      <ActiveDevices/>
+      {/* <h3 className='subheading'>Device 1</h3> */}
       <div className="dashboard-content">
         <div className="left-panel">
           <Line data={lineData} options={{
@@ -65,6 +72,16 @@ function Dashboard() {
           <StatusBlock status={powerReading} title={"Estimated Cost"} unit={"INR"}/>
         </div>
       </div>
+      <div className="download-section">
+        <h2>Download Meter Data</h2>
+        <button className="download-btn" onClick={() => handleDownload("json")}>
+          Download JSON
+        </button>
+        <button className="download-btn" onClick={() => handleDownload("csv")}>
+          Download CSV
+        </button>
+      </div>
+
     </div>
   );
 }

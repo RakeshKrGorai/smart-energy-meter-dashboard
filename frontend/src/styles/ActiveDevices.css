@@ -1,0 +1,25 @@
+.active-devices-container {
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  .active-devices-container h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .active-devices-list {
+    list-style: none;
+    padding-left: 1rem;
+  }
+  
+  .active-devices-list li {
+    margin: 0.25rem 0;
+    font-weight: 500;
+    color: #4CAF50;
+  }
+  
