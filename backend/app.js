@@ -20,10 +20,61 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Add this helper function at the top
+const checkDeviceStatus = async () => {
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    
+    const devices = await MeterReading.aggregate([
+      // Get the latest reading for each device
+      { 
+        $sort: { createdAt: -1 } 
+      },
+      { 
+        $group: { 
+          _id: "$deviceId", 
+          latestReading: { $first: "$$ROOT" } 
+        } 
+      }
+    ]);
+  
+    return devices.map(device => ({
+      deviceId: device._id,
+      isOnline: device.latestReading.createdAt >= fiveMinutesAgo,
+      lastSeen: device.latestReading.createdAt,
+      voltage: device.latestReading.voltage,
+      current: device.latestReading.current,
+      power: device.latestReading.power
+    }));
+  };
+  
+  // Update your /device-status endpoint
+  app.get("/device-status", async (req, res) => {
+    try {
+      const status = await checkDeviceStatus();
+      
+      // Ensure both sockets are always returned
+      const allDevices = ["ESP32_METER_01_SOCKET_1", "ESP32_METER_01_SOCKET_2"].map(id => {
+        const device = status.find(d => d.deviceId === id);
+        return device || { 
+          deviceId: id, 
+          isOnline: false, 
+          lastSeen: null, 
+          voltage: null, 
+          current: null, 
+          power: null 
+        };
+      });
+  
+      res.json(allDevices);
+    } catch (err) {
+      res.status(500).json({ error: "Failed to check device status" });
+    }
+  });
+
 app.post("/meter-data", async(req,res)=>{
     try{
-        const {voltage, current} = req.body;
-        const newReading = new MeterReading(req.body);
+        const {deviceId, current, voltage, power} = req.body;
+        const newReading = new MeterReading({deviceId, current, voltage, power});
         await newReading.save();
         console.log("Data saved:", newReading);
         res.status(201).json(newReading);
@@ -36,7 +87,7 @@ app.post("/meter-data", async(req,res)=>{
 
 app.get("/meter-data", async (req,res)=>{
     try{
-        const readings = await MeterReading.find({}).limit(50);
+        const readings = await MeterReading.find({});
         console.log("Fetched Meter Data : "+readings);
         res.json(readings)
     }
