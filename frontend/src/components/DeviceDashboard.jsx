@@ -60,7 +60,7 @@ function DeviceDashboard() {
 
   return (
     <div className="device-dashboard">
-      <h1>Device Dashboard: {deviceId}</h1>
+      <h1 className='device-heading'>Device: {deviceId}</h1>
       <div className="dashboard-content">
         <div className="left-panel">
           <Line data={deviceData} options={{

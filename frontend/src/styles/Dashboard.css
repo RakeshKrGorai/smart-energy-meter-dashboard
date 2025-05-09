@@ -52,3 +52,9 @@
   .download-btn:hover {
     background-color: #1976d2;
   }
+
+  .device-heading{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* color: #2196f3; */
+  }

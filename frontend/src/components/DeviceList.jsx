@@ -49,7 +49,7 @@ function DeviceList() {
                         </div>
                         <div className="device-info">
                             <h3 className="device-name">{device.deviceId}</h3>
-                            <p className="device-status">
+                            <p className= {`device-status ${device.isOnline ? 'device-online' : 'device-offline'}`}>
                                 {device.isOnline ? 'Online' : 'Offline'}
                             </p>
                             {device.lastSeen && (
